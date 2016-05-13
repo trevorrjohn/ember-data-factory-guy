@@ -479,42 +479,6 @@ class FactoryGuy {
       this.modelDefinitions = {};
     }
   }
-  /**
-   Build url's for the mockjax calls. Proxy to the adapters buildURL method.
-
-   @param {String} typeName model type name like 'user' for User model
-   @param {String} id
-   @return {String} url
-   */
-  buildURL(modelName, id = null) {
-    const adapter = this.store.adapterFor(modelName);
-    return adapter.buildURL(modelName, id);
-  }
-  /**
-   Change reload behavior to only used cached models for find/findAll.
-   You still have to handle query calls, since they always ajax for data.
-
-   @params {Array} except list of models you don't want to mark as cached
-   */
-  cacheOnlyMode({except=[]}={}) {
-    let store = this.store;
-    let findAdapter = store.adapterFor.bind(store);
-
-    store.adapterFor = function (name) {
-      let adapter = findAdapter(name);
-      let shouldCache = ()=> {
-        if (Ember.isPresent(except)) {
-           return (Ember.A(except).contains(name));
-        }
-        return false;
-      };
-      adapter.shouldBackgroundReloadAll = shouldCache;
-      adapter.shouldBackgroundReloadRecord = shouldCache;
-      adapter.shouldReloadRecord = shouldCache;
-      adapter.shouldReloadAll = shouldCache;
-      return adapter;
-    };
-  }
 }
 
 let factoryGuy = new FactoryGuy();

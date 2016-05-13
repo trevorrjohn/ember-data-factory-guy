@@ -8,8 +8,6 @@ import User from 'dummy/models/user';
 let App = null;
 const A = Ember.A;
 
-import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
-
 //module('FactoryGuy', inlineSetup(App, '-active-model'));
 module('FactoryGuy', inlineSetup(App, '-json-api'));
 

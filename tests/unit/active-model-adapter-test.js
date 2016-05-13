@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import FactoryGuy, { build, buildList, make, makeList } from 'ember-data-factory-guy';
-import TestHelper from 'ember-data-factory-guy/factory-guy-test-helper';
 
 import SharedAdapterBehavior from './shared-adapter-tests';
 import { title, inlineSetup } from '../helpers/utility-methods';
@@ -11,26 +10,6 @@ let adapterType = '-active-model';
 
 
 SharedAdapterBehavior.all(adapter, adapterType);
-
-module(title(adapter, 'FactoryGuyTestHelper#mockCreate custom'), inlineSetup(App, adapterType));
-
-test("returns camelCase attributes", function (assert) {
-  Ember.run(function () {
-    let done = assert.async();
-    let customDescription = "special description";
-
-    TestHelper.mockCreate('profile', {
-      returns: {camel_case_description: customDescription}
-    });
-
-    FactoryGuy.store.createRecord('profile', {
-      camel_case_description: 'description'
-    }).save().then(function (profile) {
-      ok(profile.get('camelCaseDescription') === customDescription);
-      done();
-    });
-  });
-});
 
 module(title(adapter, 'FactoryGuy#build custom'), inlineSetup(App, adapterType));
 

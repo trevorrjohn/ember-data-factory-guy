@@ -40,15 +40,12 @@ let theUsualSetup = function (adapterType) {
     FactoryGuy.setStore(store);
   }
 
-  $.mockjaxSettings.logging = false;
-  $.mockjaxSettings.responseTime = 0;
   return App;
 };
 
 let theUsualTeardown = function (App) {
   Ember.run(function() {
     App.destroy();
-    $.mockjax.clear();
   });
 };
 
